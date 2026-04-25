@@ -3,22 +3,29 @@
 <head>
 <title>SpaceCalc</title>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
 <style>
 
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 html, body {
 	width:100%;
 	height:100%;
 	overflow: hidden;
+	touch-action: none;
+}
+
+canvas {
+	display: block;
 }
 
 .modalwin {
-	width: 400px;
-	height: 430px;
+	width: max-content;
+	height: auto;
 	top: 10%;
 	right: 0;
 	left: 0;
@@ -1120,7 +1127,7 @@ if (!localStorage.getItem("sc_latitude") || !localStorage.getItem("sc_longitude"
 }
 
 // Вызов справки.
-canvas.ondblclick = function() {
+canvas.ondblclick = function() {	
 	helpWin.style.color = sc_colors.names[vmod];
 	helpWin.style.background = sc_colors.sky[vmod];
 	helpWin.style.border = '1px solid ' + sc_colors.skyline[vmod];
@@ -1143,7 +1150,7 @@ window.onbeforeunload = function() {
 }
 
 // События кнопок мыши
-canvas.onmousedown = function(event) {
+canvas.onpointerdown = function(event) {
 	if (event.which == 1) {
 		isDragging = true;
 		mouseX = event.pageX - canvas.offsetLeft;
@@ -1151,12 +1158,12 @@ canvas.onmousedown = function(event) {
 	}
 }
 
-window.onmouseup = function(event) {
+window.onpointerup = function(event) {
 	isDragging = false;
 }
 
 // События перемещения мыши
-window.onmousemove = function(event) {
+window.onpointermove = function(event) {
 	if (isDragging) {
 		var x = event.pageX - canvas.offsetLeft;
 		var y = event.pageY - canvas.offsetTop;
